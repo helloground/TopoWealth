@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopographyOfWealth_Pittsburgh</title>
+    <link href="css/default.css" rel="stylesheet" />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+
+
+
+</head>
+<body>
+    
+    <div id='map' style='width: 800px; height: 600px;'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGVsbG9ncm91bmQiLCJhIjoiY2l1MDZiZ2k3MDFhODJvczV5eGZrZG56MiJ9.mp_OW8Y2roxCxDikWL2JUQ';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [-79.99, 40.44], // starting position
+    zoom: 12 // starting zoom
+});
+
+map.on('load', function () {
+    map.addSource('businesses', {
+        type: 'vector',
+        url: 'mapbox://helloground.2rj54md3' //Your Mapbox tileset Map ID
+    });
+
+    //Add the extrusion layer to the map
+    map.addLayer({
+        'id': 'businesses',
+        'source': 'businesses', //name of source
+        'source-layer': 'BusinessBuffers-3rihq7', //name of the layer in the tileset
+        'type': 'fill-extrusion',
+        "paint": {
+            "fill-extrusion-height": {
+                "type": "identity",
+                "property": "price_rang"
+            },
+            "fill-extrusion-color": "red",
+            "fill-extrusion-opacity":0.5
+
+            
+        }
+    });
+
+})</script>
+</body>
+</html>
